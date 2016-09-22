@@ -13,12 +13,14 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $url = 'http://api.giphy.com/v1/gifs/search?q='.$_GET['q'].'&api_key=dc6zaTOxFJmzC';
+        $url = 'http://api.openweathermap.org/data/2.5/weather?q='.$_GET['q'].'&APPID=b1833859ce7d0c677f8da2b52b2d7200';
         $obj = json_decode(file_get_contents($url), true);
 
         return $this->render('default/index.html.twig', [
-            'alt' => $_GET['q'],
-            'src' => $obj['data'][0]['images']['original']['url'],
+            'wind_speed' => $obj['wind']['speed'],
+            // 'temperature': TODO
+            // 'humidity': TODO
+            // etc..
         ]);
     }
 }
